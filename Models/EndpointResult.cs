@@ -4,7 +4,7 @@
     {
         // Kullanıcıya arayüzde gösterilecek olan ana sütun (Birleştirilmiş Nihai Hali)
         public string UrlOrPath { get; set; }
-        public string OriginalFragment { get; set; } // Kodun içindeki asıl hali (Örn: @GET("/users"))
+        public string OriginalFragment { get; set; } // Kodun içindeki asıl hali (Örn: @GET("/users")
         public string FilePath { get; set; }
         public int ConfidenceScore { get; set; }
         public string Type { get; set; }
