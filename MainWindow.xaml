@@ -1,0 +1,46 @@
+﻿<Window x:Class="ApkAnalyzerPro.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="APK Analyzer Pro - Security Recon" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen" AllowDrop="True" Drop="Window_Drop">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Üst Panel: Dosya Seçimi -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Label Content="APK Dosyası:" VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBox x:Name="TxtApkPath" Width="550" Margin="10,0" VerticalContentAlignment="Center" IsReadOnly="True" 
+                     ToolTip="Buraya APK sürükleyip bırakabilirsiniz."/>
+            <Button x:Name="BtnBrowse" Content="Gözat" Width="80" Margin="0,0,10,0" Click="BtnBrowse_Click"/>
+            <Button x:Name="BtnAnalyze" Content="Analiz Et" Width="100" Background="#28a745" Foreground="White" FontWeight="Bold" Click="BtnAnalyze_Click"/>
+        </StackPanel>
+
+        <!-- Orta Panel: Veri Tablosu -->
+        <DataGrid x:Name="DgResults" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Skor" Binding="{Binding ConfidenceScore}" Width="50"/>
+                <DataGridTextColumn Header="Tür" Binding="{Binding Type}" Width="120"/>
+                <DataGridTextColumn Header="Nihai (Birleştirilmiş) URL" Binding="{Binding UrlOrPath}" Width="350"/>
+                <DataGridTextColumn Header="Orijinal Kod Parçası" Binding="{Binding OriginalFragment}" Width="180"/>
+                <DataGridTextColumn Header="Dosya" Binding="{Binding FilePath}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Alt Panel: Durum Çubuğu -->
+        <Grid Grid.Row="2" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+                <ProgressBar x:Name="ProgressBar" Height="15" Margin="0,0,10,5" Minimum="0" Maximum="100"/>
+                <TextBlock x:Name="TxtStatus" Text="Hazır. APK dosyası seçin veya sürükleyin." FontStyle="Italic" Foreground="Gray"/>
+            </StackPanel>
+            <Button x:Name="BtnExport" Grid.Column="1" Content="JSON Dışa Aktar" Width="120" Height="30" Click="BtnExport_Click"/>
+        </Grid>
+    </Grid>
+</Window>
